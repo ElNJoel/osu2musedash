@@ -1,13 +1,20 @@
 # osu2MuseDash Web Converter
 
-## v0.9 kawaii mascot title preview
+## v1.0 subtle title mascot overlay
 
-This version adds a bottom kawaii companion that automatically analyzes the detected song title and artist, then changes its mood message and accent color.
+This version changes the companion into a subtle floating overlay instead of a full-width bottom bar.
 
-Highlights:
-- fixed bottom mascot dock
-- title-based mood analysis
-- cute pseudo-3D character with bobbing animation
-- auto-updating message while you browse the app
+What changed:
+- analyzes the song title only
+- derives a small themed mascot from the title
+- shows a subtle floating pseudo-3D mascot in the lower-right corner
+- adds a small speech bubble above the mascot
+- no large companion bar anymore
 
-The mascot appears in the lower area of the app and reacts as soon as a beatmap title is detected.
+Mascot archetypes:
+- Phantom Cat
+- Heart Bunny
+- Ember Fox
+- Aqua Drop
+- Bolt Birb
+- Starbun

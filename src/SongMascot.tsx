@@ -1,137 +1,129 @@
 interface Props {
   title?: string | null;
-  artist?: string | null;
 }
 
-type MascotMood = {
-  mood: string;
+type MascotProfile = {
+  type: string;
+  name: string;
   face: string;
   accentClass: string;
   accessory: string;
   bubble: string;
 };
 
-function analyzeSongTitle(title?: string | null, artist?: string | null): MascotMood {
-  const raw = `${title ?? ""} ${artist ?? ""}`.trim();
+function analyzeSongTitle(title?: string | null): MascotProfile {
+  const raw = `${title ?? ""}`.trim();
   const t = raw.toLowerCase();
 
   if (!raw) {
     return {
-      mood: "idle",
+      type: "starbun",
+      name: "Starbun",
       face: "•ᴗ•",
       accentClass: "mint",
-      accessory: "star",
-      bubble: "Upload a beatmap and I will react to the song title for you."
+      accessory: "★",
+      bubble: "Upload a beatmap and I will appear as a tiny song mascot."
     };
   }
 
-  const rules: Array<{ match: RegExp; mood: MascotMood }> = [
+  const rules: Array<{ match: RegExp; profile: MascotProfile }> = [
     {
-      match: /(night|moon|dark|shadow|midnight|black|resolve|phantom|joker)/i,
-      mood: {
-        mood: "mysterious",
+      match: /(night|moon|dark|shadow|midnight|black|resolve|phantom|joker|mystic)/i,
+      profile: {
+        type: "phantomcat",
+        name: "Phantom Cat",
         face: "◕‿◕",
         accentClass: "violet",
-        accessory: "moon",
-        bubble: `This title feels mysterious and stylish. I would preview it with a dreamy night vibe ✨`
+        accessory: "☾",
+        bubble: `“${title}” feels mysterious, so I became a tiny Phantom Cat.`
       }
     },
     {
-      match: /(love|heart|kiss|sweet|dream|smile|happy|sunshine|star)/i,
-      mood: {
-        mood: "cute",
+      match: /(love|heart|kiss|sweet|dream|smile|happy|sunshine|cute|star)/i,
+      profile: {
+        type: "heartbunny",
+        name: "Heart Bunny",
         face: "˶ᵔ ᵕ ᵔ˶",
         accentClass: "pink",
-        accessory: "heart",
-        bubble: `Aww, this title feels extra kawaii. I would pair it with a cheerful pastel mood ♡`
+        accessory: "❤",
+        bubble: `“${title}” sounds soft and sweet, so I turned into Heart Bunny.`
       }
     },
     {
-      match: /(fire|burn|inferno|rage|blood|kill|war|battle|danger)/i,
-      mood: {
-        mood: "intense",
+      match: /(fire|burn|inferno|rage|blood|kill|war|battle|danger|blaze)/i,
+      profile: {
+        type: "emberfox",
+        name: "Ember Fox",
         face: "òᴗó",
         accentClass: "orange",
-        accessory: "flame",
-        bubble: `This one sounds intense. I would guide the preview with a fiery action mood 🔥`
+        accessory: "✦",
+        bubble: `“${title}” sounds intense, so I show up as Ember Fox.`
       }
     },
     {
-      match: /(blue|rain|ocean|sky|wind|snow|ice|winter|sea)/i,
-      mood: {
-        mood: "calm",
+      match: /(blue|rain|ocean|sky|wind|snow|ice|winter|sea|water)/i,
+      profile: {
+        type: "aquadrop",
+        name: "Aqua Drop",
         face: "ˆᵕˆ",
         accentClass: "cyan",
-        accessory: "drop",
-        bubble: `This title feels calm and cool. I would keep the companion soft and floaty 🌊`
+        accessory: "✿",
+        bubble: `“${title}” feels airy and cool, so I became Aqua Drop.`
       }
     },
     {
-      match: /(run|speed|rush|go|chase|beat|dance|party|jump|up)/i,
-      mood: {
-        mood: "energetic",
+      match: /(run|speed|rush|go|chase|beat|dance|party|jump|up|drive)/i,
+      profile: {
+        type: "boltbirb",
+        name: "Bolt Birb",
         face: "≧◡≦",
         accentClass: "lime",
-        accessory: "bolt",
-        bubble: `Ooh, this sounds energetic. I would bounce along with a fast playful mood ⚡`
+        accessory: "⚡",
+        bubble: `“${title}” feels energetic, so I turned into Bolt Birb.`
       }
     }
   ];
 
   for (const rule of rules) {
-    if (rule.match.test(t)) return rule.mood;
+    if (rule.match.test(t)) return rule.profile;
   }
 
   return {
-    mood: "neutral",
+    type: "starbun",
+    name: "Starbun",
     face: "•ᴗ•",
     accentClass: "mint",
-    accessory: "star",
-    bubble: `I am reading “${title ?? raw}”. It feels balanced, so I would keep a cute all-purpose companion mood ✨`
+    accessory: "★",
+    bubble: `I read “${title}”, so I chose a cute neutral mascot: Starbun.`
   };
 }
 
-function accessoryGlyph(kind: string): string {
-  switch (kind) {
-    case "moon": return "☾";
-    case "heart": return "❤";
-    case "flame": return "✦";
-    case "drop": return "✿";
-    case "bolt": return "⚡";
-    default: return "★";
-  }
-}
-
-export function SongMascot({ title, artist }: Props) {
-  const mood = analyzeSongTitle(title, artist);
+export function SongMascot({ title }: Props) {
+  const mascot = analyzeSongTitle(title);
 
   return (
-    <aside className={`mascotDock ${mood.accentClass}`}>
-      <div className="mascotBubble">
-        <p className="mascotCaption">Kawaii helper</p>
-        <strong>{title ? `Detected song: ${title}` : "Waiting for song title"}</strong>
-        {artist && <p className="mascotMeta">Artist: {artist}</p>}
-        <p>{mood.bubble}</p>
+    <aside className={`songMascotOverlay ${mascot.accentClass} ${mascot.type}`} aria-label="song mascot preview">
+      <div className="songMascotBubble">
+        <span className="songMascotLabel">Song mascot</span>
+        <strong>{mascot.name}</strong>
+        <p>{mascot.bubble}</p>
       </div>
 
-      <div className="mascotStage">
-        <div className="mascotShadow" />
-        <div className="mascotAccessory">{accessoryGlyph(mood.accessory)}</div>
-        <div className="mascot3D">
-          <div className="mascotHead">
-            <div className="mascotEar left" />
-            <div className="mascotEar right" />
-            <div className="mascotFace">
-              <span>{mood.face}</span>
-            </div>
+      <div className="songMascotFloat">
+        <div className="songMascotShadow" />
+        <div className="songMascotAccessory">{mascot.accessory}</div>
+        <div className="songMascotModel">
+          <div className="songMascotTail" />
+          <div className="songMascotHead">
+            <div className="songMascotEar left" />
+            <div className="songMascotEar right" />
+            <div className="songMascotFace"><span>{mascot.face}</span></div>
           </div>
-          <div className="mascotBody">
-            <div className="mascotBelly" />
-          </div>
-          <div className="mascotArm left" />
-          <div className="mascotArm right" />
-          <div className="mascotLeg left" />
-          <div className="mascotLeg right" />
+          <div className="songMascotBody"><div className="songMascotBelly" /></div>
+          <div className="songMascotArm left" />
+          <div className="songMascotArm right" />
+          <div className="songMascotLeg left" />
+          <div className="songMascotLeg right" />
         </div>
       </div>
     </aside>

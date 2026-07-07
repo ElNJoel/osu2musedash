@@ -423,7 +423,7 @@ export default function App() {
         {log.length ? log.map((line, i) => <p key={`${line}-${i}`}>{line}</p>) : <p>{buildStatus}</p>}
       </section>
 
-      <SongMascot title={mainMap?.title ?? null} artist={mainMap?.artist ?? null} />
+      <SongMascot title={mainMap?.title ?? null} />
     </main>
   );
 }
