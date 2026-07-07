@@ -174,16 +174,8 @@ export default function App() {
 
   return (
     <main>
-      <header className="hero">
-        <div>
-          <p className="eyebrow">Browser-only converter</p>
-          <h1>osu! / osu!taiko → Muse Dash .mdm</h1>
-          <p>
-            Upload an <code>.osz</code>, pick up to 3 visible difficulties, trim the demo, crop the circular cover, and download a
-            CustomAlbums-ready <code>.mdm</code>.
-          </p>
-        </div>
-        <div className="badge">No server upload</div>
+      <header className="hero heroSimple">
+        <h1>osu! / osu!taiko → Muse Dash .mdm</h1>
       </header>
 
       <nav className="steps">
@@ -215,7 +207,8 @@ export default function App() {
       {step === 2 && pkg && (
         <section className="card">
           <h2>2. Choose Muse Dash difficulties</h2>
-          <p>Muse Dash normally shows 3 visible difficulty slots, so this web version exports <code>map1.bms</code>, <code>map2.bms</code>, and <code>map3.bms</code>.</p>
+          <p>Muse Dash normally shows 3 visible difficulty slots, so this web version exports <code>map1.bms</code>, <code>map2.bms</code>, and <code>map3.bms</code>. Pick up to 3.</p>
+          <p className="selectionCount">Selected: {selected.length} / 3</p>
 
           <div className="diffList">
             {pkg.beatmaps.map((map) => {
@@ -223,11 +216,11 @@ export default function App() {
               return (
                 <article className={picked ? "diff picked" : "diff"} key={map.id}>
                   <div>
-                    <strong>{map.version}</strong>
+                    <div className="diffTitleRow"><strong>{map.version}</strong>{picked && <span className="slotBadge">map{picked.mdSlot}</span>}</div>
                     <span>{modeName(map)} · {map.hitObjects.length} objects · {mapDuration(map).toFixed(1)}s · BPM {map.baseBpm.toFixed(2)}</span>
                     <span>OD {map.difficulty.OverallDifficulty ?? "?"} / CS {map.difficulty.CircleSize ?? "?"} / AR {map.difficulty.ApproachRate ?? "?"} / suggested MD Lv {map.estimatedMdLevel}</span>
                   </div>
-                  <button type="button" onClick={() => toggleDifficulty(map)}>{picked ? "Y / selected" : "N / select"}</button>
+                  <button className={picked ? "selectToggle isSelected" : "selectToggle"} type="button" onClick={() => toggleDifficulty(map)}>{picked ? `Selected · map${picked.mdSlot}` : "Select"}</button>
                   {picked && (
                     <div className="inlineFields">
                       <label>

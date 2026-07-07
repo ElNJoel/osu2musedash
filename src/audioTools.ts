@@ -12,8 +12,21 @@ export function secondsLabel(seconds: number): string {
   return `${min}:${String(sec).padStart(2, "0")}.${String(ms).padStart(3, "0")}`;
 }
 
+function safeTerminate(ffmpeg: FFmpeg) {
+  try {
+    const result = ffmpeg.terminate?.();
+    if (result && typeof (result as Promise<unknown>).then === "function") {
+      (result as Promise<unknown>).catch(() => undefined);
+    }
+  } catch {
+    // ignore cleanup errors
+  }
+}
+
 async function loadFromCdn(ffmpeg: FFmpeg, onLog?: (msg: string) => void): Promise<void> {
   const bases = [
+    "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm",
+    "https://unpkg.com/@ffmpeg/core@0.12.10/dist/esm",
     "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd",
     "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd"
   ];
@@ -37,7 +50,7 @@ async function loadFromCdn(ffmpeg: FFmpeg, onLog?: (msg: string) => void): Promi
   }
 
   throw new Error(
-    `Could not load ffmpeg.wasm from CDN. This avoids Cloudflare's 25 MiB file limit, but the browser still needs internet/CDN access. Details: ${lastError}`
+    `Could not load ffmpeg.wasm from CDN. Make sure your browser can access jsDelivr or unpkg. Details: ${lastError}`
   );
 }
 
@@ -63,7 +76,7 @@ async function getFfmpeg(onLog?: (msg: string) => void): Promise<FFmpeg> {
     try {
       await loadFromCdn(ffmpeg, onLog);
     } catch (err) {
-      await ffmpeg.terminate().catch(() => undefined);
+      safeTerminate(ffmpeg);
       ffmpegPromise = null;
       throw err;
     }
@@ -77,6 +90,17 @@ async function getFfmpeg(onLog?: (msg: string) => void): Promise<FFmpeg> {
 function extensionFromName(name: string): string {
   const ext = name.split(".").pop()?.toLowerCase();
   return ext ? `.${ext}` : ".mp3";
+}
+
+async function maybeDeleteFile(ffmpeg: FFmpeg, path: string) {
+  try {
+    const result = ffmpeg.deleteFile(path);
+    if (result && typeof (result as Promise<unknown>).then === "function") {
+      await result;
+    }
+  } catch {
+    // ignore cleanup errors
+  }
 }
 
 export async function convertAudioToOggs(
@@ -117,9 +141,9 @@ export async function convertAudioToOggs(
   const music = await ffmpeg.readFile("music.ogg");
   const demoData = await ffmpeg.readFile("demo.ogg");
 
-  await ffmpeg.deleteFile(input).catch(() => undefined);
-  await ffmpeg.deleteFile("music.ogg").catch(() => undefined);
-  await ffmpeg.deleteFile("demo.ogg").catch(() => undefined);
+  await maybeDeleteFile(ffmpeg, input);
+  await maybeDeleteFile(ffmpeg, "music.ogg");
+  await maybeDeleteFile(ffmpeg, "demo.ogg");
 
   return {
     musicOgg: music instanceof Uint8Array ? music : new Uint8Array(music as ArrayBuffer),
