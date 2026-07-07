@@ -1,5 +1,5 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile } from "@ffmpeg/util";
+import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import type { DemoSelection } from "./types";
 
 let ffmpegPromise: Promise<FFmpeg> | null = null;
@@ -12,10 +12,33 @@ export function secondsLabel(seconds: number): string {
   return `${min}:${String(sec).padStart(2, "0")}.${String(ms).padStart(3, "0")}`;
 }
 
-function assetUrl(path: string): string {
-  const base = import.meta.env.BASE_URL || "/";
-  const cleanBase = base.endsWith("/") ? base : `${base}/`;
-  return `${cleanBase}${path.replace(/^\//, "")}`;
+async function loadFromCdn(ffmpeg: FFmpeg, onLog?: (msg: string) => void): Promise<void> {
+  const bases = [
+    "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd",
+    "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd"
+  ];
+
+  let lastError = "";
+  for (const base of bases) {
+    try {
+      onLog?.(`Loading ffmpeg.wasm from ${base}...`);
+
+      await ffmpeg.load({
+        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
+        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm")
+      });
+
+      onLog?.("ffmpeg.wasm loaded.");
+      return;
+    } catch (err) {
+      lastError = err instanceof Error ? err.message : String(err);
+      onLog?.(`CDN load failed: ${lastError}`);
+    }
+  }
+
+  throw new Error(
+    `Could not load ffmpeg.wasm from CDN. This avoids Cloudflare's 25 MiB file limit, but the browser still needs internet/CDN access. Details: ${lastError}`
+  );
 }
 
 async function getFfmpeg(onLog?: (msg: string) => void): Promise<FFmpeg> {
@@ -31,22 +54,18 @@ async function getFfmpeg(onLog?: (msg: string) => void): Promise<FFmpeg> {
     ffmpeg.on("progress", ({ progress, time }) => {
       if (onLog && Number.isFinite(progress)) {
         const pct = Math.max(0, Math.min(100, Math.round(progress * 100)));
-        if (pct % 10 === 0) onLog(`ffmpeg progress ${pct}% · ${Math.round(time / 1000000)}s`);
+        if (pct === 0 || pct === 25 || pct === 50 || pct === 75 || pct === 100) {
+          onLog(`ffmpeg progress ${pct}% · ${Math.round(time / 1000000)}s`);
+        }
       }
     });
 
-    const coreURL = assetUrl("ffmpeg/ffmpeg-core.js");
-    const wasmURL = assetUrl("ffmpeg/ffmpeg-core.wasm");
-    onLog?.("Loading local ffmpeg.wasm core...");
     try {
-      await ffmpeg.load({ coreURL, wasmURL });
+      await loadFromCdn(ffmpeg, onLog);
     } catch (err) {
       await ffmpeg.terminate().catch(() => undefined);
       ffmpegPromise = null;
-      const details = err instanceof Error ? err.message : String(err);
-      throw new Error(
-        `Could not load local ffmpeg.wasm core. Make sure /public/ffmpeg/ffmpeg-core.js and ffmpeg-core.wasm exist after npm install/build. Details: ${details}`
-      );
+      throw err;
     }
 
     return ffmpeg;
