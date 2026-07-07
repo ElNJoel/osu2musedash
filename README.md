@@ -1,16 +1,13 @@
 # osu2MuseDash Web Converter
 
-## v0.6
+## v0.9 kawaii mascot title preview
 
-This version fixes two issues:
+This version adds a bottom kawaii companion that automatically analyzes the detected song title and artist, then changes its mood message and accent color.
 
-- ffmpeg CDN loading now tries the recommended **esm** builds first for Vite, then falls back to **umd**.
-- the runtime error `Cannot read properties of undefined (reading 'catch')` is fixed by removing unsafe `.catch()` calls on cleanup methods that may return `void`.
+Highlights:
+- fixed bottom mascot dock
+- title-based mood analysis
+- cute pseudo-3D character with bobbing animation
+- auto-updating message while you browse the app
 
-It also improves the UI:
-
-- cleaner step bar
-- more visual difficulty cards
-- better select button states
-- selected slot badges
-- selected count badge
+The mascot appears in the lower area of the app and reacts as soon as a beatmap title is detected.

@@ -464,3 +464,426 @@ label, .summary p, .log p, .timePills span { color: #ffffff; }
     min-width: 100%;
   }
 }
+
+
+/* Fix native select dropdown option colors */
+select {
+  color: #ffffff;
+  background-color: #0f172a;
+}
+
+select option,
+select optgroup {
+  color: #ffffff !important;
+  background: #0f172a !important;
+  background-color: #0f172a !important;
+}
+
+select option:checked,
+select option:hover,
+select option:focus {
+  color: #ffffff !important;
+  background: #2b1a78 !important;
+  background-color: #2b1a78 !important;
+}
+
+
+.settingsGridWide {
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+.scenePicker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.sceneChip, .speedChip {
+  text-align: left;
+  border-radius: 14px;
+  padding: 12px;
+  background: #0b1220;
+  border: 1px solid #223049;
+  color: #ffffff;
+}
+
+.sceneChip strong {
+  display: block;
+  font-size: 0.96rem;
+}
+
+.sceneCode {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.74rem;
+  color: #94a3b8;
+}
+
+.sceneChip.active, .speedChip.active {
+  background: linear-gradient(180deg, rgba(45,212,191,0.18), rgba(45,212,191,0.08));
+  border-color: #2dd4bf;
+  box-shadow: inset 0 0 0 1px rgba(45,212,191,0.3);
+}
+
+.speedPicker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 8px 0 14px;
+}
+
+.demoTopRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.demoStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.statPill {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #0b1220;
+  border: 1px solid #223049;
+}
+
+.statPill span {
+  display: block;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+}
+
+.statPill strong {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.quickActionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.demoFineGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.coverPreviewCard {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  background: #0b1220;
+  border: 1px solid #223049;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.coverMiniPreview {
+  width: 104px;
+  height: 104px;
+  border-radius: 999px;
+  border: 2px solid #2dd4bf;
+  object-fit: cover;
+  background: #111827;
+  flex-shrink: 0;
+}
+
+.coverMiniPreview.large {
+  width: 132px;
+  height: 132px;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.progressCard {
+  margin: 18px 0;
+  padding: 16px;
+  border-radius: 18px;
+  background: #0b1220;
+  border: 1px solid #223049;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.progressBar {
+  height: 14px;
+  border-radius: 999px;
+  background: #111827;
+  border: 1px solid #223049;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2dd4bf, #22c55e);
+  transition: width 0.25s ease;
+}
+
+.progressStatus {
+  margin: 10px 0 0;
+  color: #ffffff;
+}
+
+@media (max-width: 980px) {
+  .settingsGridWide {
+    grid-template-columns: 1fr;
+  }
+  .scenePicker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .demoFineGrid, .summaryGrid, .coverPreviewCard, .demoStatsGrid, .speedPicker {
+    grid-template-columns: 1fr;
+  }
+  .coverPreviewCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .coverMiniPreview.large {
+    width: 110px;
+    height: 110px;
+  }
+  .scenePicker {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+main {
+  padding-bottom: 210px;
+}
+
+.mascotDock {
+  position: fixed;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1.25fr 220px;
+  gap: 14px;
+  align-items: end;
+  padding: 16px 18px;
+  border-radius: 24px;
+  background: rgba(8, 12, 24, 0.92);
+  border: 1px solid #243149;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+.mascotBubble {
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.mascotBubble strong,
+.mascotBubble p,
+.mascotCaption,
+.mascotMeta {
+  color: #ffffff;
+}
+
+.mascotCaption {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  opacity: 0.82;
+}
+
+.mascotMeta {
+  margin: 4px 0 8px;
+  opacity: 0.82;
+}
+
+.mascotStage {
+  position: relative;
+  height: 156px;
+  display: grid;
+  place-items: end center;
+}
+
+.mascotShadow {
+  position: absolute;
+  bottom: 6px;
+  width: 110px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.35);
+  filter: blur(6px);
+}
+
+.mascotAccessory {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  font-size: 1.5rem;
+  animation: floaty 2.2s ease-in-out infinite;
+}
+
+.mascot3D {
+  position: relative;
+  width: 126px;
+  height: 144px;
+  animation: bobMascot 2.2s ease-in-out infinite;
+}
+
+.mascotHead {
+  position: absolute;
+  left: 23px;
+  top: 0;
+  width: 80px;
+  height: 72px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #d7deff 68%, #bdc7ff 100%);
+  box-shadow: inset -8px -12px 0 rgba(173, 184, 255, 0.35), 0 10px 18px rgba(0,0,0,0.22);
+}
+
+.mascotEar {
+  position: absolute;
+  top: -10px;
+  width: 24px;
+  height: 28px;
+  border-radius: 18px 18px 10px 10px;
+  background: inherit;
+  box-shadow: inherit;
+}
+
+.mascotEar.left { left: 8px; transform: rotate(-18deg); }
+.mascotEar.right { right: 8px; transform: rotate(18deg); }
+
+.mascotFace {
+  position: absolute;
+  inset: 18px 0 0;
+  display: grid;
+  place-items: center;
+  color: #13203a;
+  font-weight: 900;
+  font-size: 1.02rem;
+}
+
+.mascotBody {
+  position: absolute;
+  left: 28px;
+  top: 60px;
+  width: 70px;
+  height: 58px;
+  border-radius: 28px;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #d7deff 70%, #bcc7ff 100%);
+  box-shadow: inset -6px -10px 0 rgba(173,184,255,0.35), 0 12px 18px rgba(0,0,0,0.2);
+}
+
+.mascotBelly {
+  position: absolute;
+  left: 18px;
+  top: 12px;
+  width: 34px;
+  height: 28px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.72);
+}
+
+.mascotArm, .mascotLeg {
+  position: absolute;
+  background: linear-gradient(180deg, #dce2ff, #bcc7ff);
+  box-shadow: 0 8px 14px rgba(0,0,0,0.18);
+}
+
+.mascotArm {
+  top: 74px;
+  width: 18px;
+  height: 40px;
+  border-radius: 14px;
+}
+
+.mascotArm.left { left: 18px; transform: rotate(18deg); }
+.mascotArm.right { right: 18px; transform: rotate(-18deg); }
+
+.mascotLeg {
+  top: 108px;
+  width: 20px;
+  height: 28px;
+  border-radius: 12px;
+}
+
+.mascotLeg.left { left: 40px; }
+.mascotLeg.right { right: 40px; }
+
+.mascotDock.mint .mascotAccessory { color: #67e8f9; }
+.mascotDock.pink .mascotAccessory { color: #f9a8d4; }
+.mascotDock.violet .mascotAccessory { color: #c4b5fd; }
+.mascotDock.orange .mascotAccessory { color: #fdba74; }
+.mascotDock.cyan .mascotAccessory { color: #7dd3fc; }
+.mascotDock.lime .mascotAccessory { color: #bef264; }
+
+.mascotDock.mint { border-color: rgba(45, 212, 191, 0.45); }
+.mascotDock.pink { border-color: rgba(244, 114, 182, 0.45); }
+.mascotDock.violet { border-color: rgba(167, 139, 250, 0.45); }
+.mascotDock.orange { border-color: rgba(251, 146, 60, 0.45); }
+.mascotDock.cyan { border-color: rgba(56, 189, 248, 0.45); }
+.mascotDock.lime { border-color: rgba(163, 230, 53, 0.45); }
+
+@keyframes bobMascot {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(8deg); }
+}
+
+@media (max-width: 900px) {
+  main { padding-bottom: 260px; }
+  .mascotDock {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .mascotStage {
+    justify-content: center;
+    height: 132px;
+  }
+}
+
+@media (max-width: 620px) {
+  main { padding-bottom: 300px; }
+  .mascotDock {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 14px;
+  }
+  .mascot3D {
+    transform: scale(0.9);
+    transform-origin: center bottom;
+  }
+}
