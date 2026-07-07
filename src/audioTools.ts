@@ -1,5 +1,5 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { fetchFile } from "@ffmpeg/util";
 import type { DemoSelection } from "./types";
 
 let ffmpegPromise: Promise<FFmpeg> | null = null;
@@ -12,20 +12,42 @@ export function secondsLabel(seconds: number): string {
   return `${min}:${String(sec).padStart(2, "0")}.${String(ms).padStart(3, "0")}`;
 }
 
+function assetUrl(path: string): string {
+  const base = import.meta.env.BASE_URL || "/";
+  const cleanBase = base.endsWith("/") ? base : `${base}/`;
+  return `${cleanBase}${path.replace(/^\//, "")}`;
+}
+
 async function getFfmpeg(onLog?: (msg: string) => void): Promise<FFmpeg> {
   if (ffmpegPromise) return ffmpegPromise;
 
   ffmpegPromise = (async () => {
     const ffmpeg = new FFmpeg();
+
     ffmpeg.on("log", ({ message }) => {
       if (onLog) onLog(message);
     });
 
-    const base = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm")
+    ffmpeg.on("progress", ({ progress, time }) => {
+      if (onLog && Number.isFinite(progress)) {
+        const pct = Math.max(0, Math.min(100, Math.round(progress * 100)));
+        if (pct % 10 === 0) onLog(`ffmpeg progress ${pct}% · ${Math.round(time / 1000000)}s`);
+      }
     });
+
+    const coreURL = assetUrl("ffmpeg/ffmpeg-core.js");
+    const wasmURL = assetUrl("ffmpeg/ffmpeg-core.wasm");
+    onLog?.("Loading local ffmpeg.wasm core...");
+    try {
+      await ffmpeg.load({ coreURL, wasmURL });
+    } catch (err) {
+      await ffmpeg.terminate().catch(() => undefined);
+      ffmpegPromise = null;
+      const details = err instanceof Error ? err.message : String(err);
+      throw new Error(
+        `Could not load local ffmpeg.wasm core. Make sure /public/ffmpeg/ffmpeg-core.js and ffmpeg-core.wasm exist after npm install/build. Details: ${details}`
+      );
+    }
 
     return ffmpeg;
   })();

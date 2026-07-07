@@ -3,18 +3,15 @@
 }
 
 :root {
-  color: #f8f7ff;
-  background: #111119;
+  color: #f8fafc;
+  background: #0f172a;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(255, 92, 168, 0.28), transparent 36rem),
-    radial-gradient(circle at 90% 10%, rgba(89, 196, 255, 0.22), transparent 26rem),
-    #111119;
+  background: #0f172a;
 }
 
 main {
@@ -29,19 +26,23 @@ main {
   gap: 24px;
   align-items: end;
   margin-bottom: 20px;
+  padding: 22px;
+  border-radius: 28px;
+  background: #111827;
+  border: 1px solid #273449;
 }
 
 .eyebrow {
-  color: #9be8ff;
+  color: #2dd4bf;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  font-size: clamp(2.1rem, 5vw, 4.3rem);
   letter-spacing: -0.06em;
   line-height: 0.92;
 }
@@ -51,24 +52,24 @@ h2, h3 {
 }
 
 p {
-  color: #c9c7d8;
+  color: #cbd5e1;
   line-height: 1.55;
 }
 
 code {
   color: #fff;
-  background: rgba(255,255,255,0.09);
+  background: #1f2937;
   padding: 0.12rem 0.35rem;
   border-radius: 0.45rem;
 }
 
 .badge {
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
+  border: 1px solid #334155;
+  background: #0f172a;
   border-radius: 999px;
   padding: 10px 16px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .steps {
@@ -82,16 +83,16 @@ code {
   text-align: left;
   padding: 14px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  color: #bfbdd1;
+  border: 1px solid #273449;
+  background: #111827;
+  color: #cbd5e1;
   cursor: pointer;
 }
 
 .steps button.active {
-  color: #fff;
-  border-color: rgba(255,255,255,0.32);
-  background: linear-gradient(135deg, rgba(255,92,168,0.36), rgba(89,196,255,0.18));
+  color: #0f172a;
+  border-color: #2dd4bf;
+  background: #2dd4bf;
 }
 
 .steps button:disabled {
@@ -100,12 +101,11 @@ code {
 }
 
 .card, .log {
-  border: 1px solid rgba(255,255,255,0.13);
-  background: rgba(17, 17, 25, 0.72);
-  backdrop-filter: blur(18px);
+  border: 1px solid #273449;
+  background: #111827;
   border-radius: 28px;
   padding: 24px;
-  box-shadow: 0 30px 90px rgba(0,0,0,0.28);
+  box-shadow: none;
   margin-bottom: 18px;
 }
 
@@ -113,9 +113,9 @@ code {
   display: grid;
   place-items: center;
   min-height: 260px;
-  border: 2px dashed rgba(255,255,255,0.2);
+  border: 2px dashed #334155;
   border-radius: 26px;
-  background: rgba(255,255,255,0.045);
+  background: #0f172a;
   cursor: pointer;
 }
 
@@ -126,8 +126,8 @@ code {
 .drop span {
   display: inline-flex;
   padding: 16px 22px;
-  background: #fff;
-  color: #111119;
+  background: #2dd4bf;
+  color: #0f172a;
   border-radius: 999px;
   font-weight: 900;
 }
@@ -136,14 +136,15 @@ code {
   display: inline-flex;
   padding: 12px 15px;
   border-radius: 14px;
-  background: rgba(255,255,255,0.1);
+  background: #1f2937;
   cursor: pointer;
   color: #fff;
-  font-weight: 700;
+  font-weight: 800;
+  border: 1px solid #334155;
 }
 
 .muted {
-  color: #9f9cad;
+  color: #94a3b8;
 }
 
 .diffList {
@@ -157,14 +158,14 @@ code {
   gap: 14px;
   align-items: start;
   padding: 16px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid #273449;
   border-radius: 18px;
-  background: rgba(255,255,255,0.045);
+  background: #0f172a;
 }
 
 .diff.picked {
-  border-color: rgba(155,232,255,0.7);
-  background: rgba(89,196,255,0.1);
+  border-color: #2dd4bf;
+  background: #113536;
 }
 
 .diff strong {
@@ -175,23 +176,24 @@ code {
 
 .diff span {
   display: block;
-  color: #c7c4d6;
+  color: #cbd5e1;
   font-size: 0.92rem;
 }
 
 button {
-  border: 0;
+  border: 1px solid #334155;
   border-radius: 14px;
   padding: 11px 15px;
-  background: rgba(255,255,255,0.1);
+  background: #1f2937;
   color: #fff;
   font-weight: 800;
   cursor: pointer;
 }
 
 button.primary, .generate {
-  background: linear-gradient(135deg, #ff5ca8, #59c4ff);
-  color: #07070a;
+  background: #2dd4bf;
+  color: #0f172a;
+  border-color: #2dd4bf;
 }
 
 button:disabled {
@@ -214,14 +216,14 @@ button:disabled {
 label {
   display: grid;
   gap: 7px;
-  color: #e8e6f5;
-  font-weight: 700;
+  color: #e2e8f0;
+  font-weight: 800;
 }
 
 input, select {
   width: 100%;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: #0f172a;
+  border: 1px solid #334155;
   color: #fff;
   border-radius: 12px;
   padding: 11px 12px;
@@ -229,6 +231,10 @@ input, select {
 
 select option {
   color: #101018;
+}
+
+input[type="range"] {
+  accent-color: #2dd4bf;
 }
 
 .check {
@@ -248,16 +254,33 @@ select option {
   margin-top: 18px;
 }
 
-.panelSoft, .emptyBox {
-  border: 1px solid rgba(255,255,255,0.12);
+.panelSoft, .emptyBox, .demoEditor {
+  border: 1px solid #273449;
   border-radius: 22px;
-  background: rgba(255,255,255,0.055);
+  background: #0f172a;
   padding: 18px;
 }
 
 .audioPlayer {
   width: 100%;
   margin: 12px 0;
+}
+
+.waveCanvas {
+  width: 100%;
+  height: 220px;
+  display: block;
+  border-radius: 18px;
+  border: 1px solid #334155;
+  background: #111827;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.waveStatus {
+  margin: 8px 0 0;
+  color: #94a3b8;
+  font-size: 0.92rem;
 }
 
 .timePills {
@@ -270,9 +293,9 @@ select option {
 .timePills span {
   padding: 8px 11px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.08);
+  background: #1f2937;
   color: #fff;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .cropGrid {
@@ -288,12 +311,12 @@ select option {
   border-radius: 24px;
   background: #000;
   cursor: grab;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid #334155;
 }
 
 .ok {
-  color: #9be8ff;
-  font-weight: 800;
+  color: #2dd4bf;
+  font-weight: 900;
 }
 
 .summary {
@@ -328,5 +351,9 @@ select option {
 
   .inlineFields, .settingsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .waveCanvas {
+    height: 170px;
   }
 }

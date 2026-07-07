@@ -1,15 +1,17 @@
 {
   "name": "osu2musedash-web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Browser-only osu!/osu!taiko to Muse Dash .mdm draft converter.",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "postinstall": "node scripts/copy-ffmpeg-core.mjs",
+    "build": "node scripts/copy-ffmpeg-core.mjs && vite build",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@ffmpeg/core": "^0.12.10",
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
     "jszip": "^3.10.1",
