@@ -1,4 +1,4 @@
-# osu2MuseDash Web Converter
+# osu2MuseDash
 
 Browser-only web app that converts `.osz` / `.osu` beatmaps into a Muse Dash CustomAlbums `.mdm` draft.
 
@@ -30,18 +30,6 @@ npm run build
 ```
 
 The static output is in `dist`.
-
-## Cloudflare Pages deploy
-
-1. Create a GitHub repo, for example `osu2musedash-web`.
-2. Upload/push this project.
-3. Go to Cloudflare Dashboard → Workers & Pages → Create application → Pages.
-4. Connect your GitHub repo.
-5. Build command: `npm run build`
-6. Build output directory: `dist`
-7. Deploy.
-
-The `public/_headers` file is included so Cloudflare Pages sends COOP/COEP headers needed by advanced WebAssembly/browser audio workflows.
 
 ## Notes
 
