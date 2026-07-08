@@ -1,14 +1,17 @@
 # osu2MuseDash Web Converter
 
-## v1.4 playtest conversion type
+## v1.6 extended notes in playable preview
 
-This version moves the playable preview to the conversion-type selection area.
+This version adds extended-note / hold behavior to the playable conversion test.
 
-New behavior:
-- When the user chooses a difficulty, the app loads the song audio immediately.
-- The playable preview appears directly under Global conversion settings.
-- Changing osu!standard lane policy — auto, hitsound, xy, alternate — updates the preview.
-- The user can test the conversion style before continuing to demo/cover/export.
-- Controls remain ArrowUp / ArrowDown plus physical-style on-screen buttons.
+New:
+- osu! sliders that exceed the Slider hold threshold become HOLD bars in the playable preview.
+- osu! spinners become HOLD bars too.
+- HOLD bars have a start circle and orange tail.
+- The user must keep ArrowUp / ArrowDown pressed until the tail reaches the hit circle.
+- Physical on-screen buttons also support holding.
+- Early release gives "Released early".
+- Hold completion gives "Hold Complete".
+- A Holds counter shows how many extended notes are present in the preview.
 
-The demo editor no longer duplicates the playable preview.
+This matches the export behavior more closely: sliders/spinners that become Muse Dash hold/masher notes are now visible in the playtest.

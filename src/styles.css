@@ -831,3 +831,41 @@ main {
 .conversionPlaytest .hitButton {
   min-height: 76px;
 }
+
+
+.previewModeBadge {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(45, 212, 191, 0.14);
+  border: 1px solid rgba(45, 212, 191, 0.45);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.conversionPlaytest .previewModeBadge {
+  margin-bottom: 10px;
+}
+
+
+.playableStats {
+  grid-template-columns: repeat(5, auto);
+}
+
+.playableStats span:nth-child(5) {
+  border-color: rgba(251, 146, 60, 0.55);
+}
+
+.hitButton small {
+  color: #ffffff;
+}
+
+@media (max-width: 780px) {
+  .playableStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

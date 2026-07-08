@@ -367,7 +367,7 @@ export default function App() {
                 <h3>Test conversion type</h3>
                 <p>Change <strong>osu!standard lane policy</strong> above — auto, hitsound, xy, or alternate — and play this preview to feel how that conversion maps the notes.</p>
               </div>
-              <PlayablePreview beatmap={mainMap} audioFile={audioFile} lanePolicy={settings.lanePolicy} />
+              <PlayablePreview beatmap={mainMap} audioFile={audioFile} lanePolicy={settings.lanePolicy} sliderHoldMs={settings.sliderHoldMs} />
             </div>
           )}
 
