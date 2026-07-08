@@ -676,284 +676,214 @@ select option:focus {
 }
 
 
-
 main {
-  padding-bottom: 150px;
+  padding-bottom: 210px;
 }
 
-.songMascotOverlay {
+.mascotDock {
   position: fixed;
-  right: 22px;
+  left: 18px;
+  right: 18px;
   bottom: 18px;
-  z-index: 50;
-  width: 230px;
-  pointer-events: none;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1.25fr 220px;
+  gap: 14px;
+  align-items: end;
+  padding: 16px 18px;
+  border-radius: 24px;
+  background: rgba(8, 12, 24, 0.92);
+  border: 1px solid #243149;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
 }
 
-.songMascotBubble {
-  margin-left: 12px;
-  margin-bottom: 8px;
-  padding: 10px 12px;
-  border-radius: 16px;
-  background: rgba(10, 16, 30, 0.84);
-  border: 1px solid rgba(255,255,255,0.10);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.24);
+.mascotBubble {
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-.songMascotLabel {
-  display: block;
-  margin-bottom: 4px;
-  color: rgba(255,255,255,0.72);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.68rem;
-  font-weight: 800;
-}
-
-.songMascotBubble strong,
-.songMascotBubble p {
+.mascotBubble strong,
+.mascotBubble p,
+.mascotCaption,
+.mascotMeta {
   color: #ffffff;
 }
 
-.songMascotBubble p {
-  margin: 5px 0 0;
-  font-size: 0.88rem;
-  line-height: 1.35;
+.mascotCaption {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  opacity: 0.82;
 }
 
-.songMascotFloat {
+.mascotMeta {
+  margin: 4px 0 8px;
+  opacity: 0.82;
+}
+
+.mascotStage {
   position: relative;
-  height: 150px;
+  height: 156px;
   display: grid;
   place-items: end center;
 }
 
-.songMascotShadow {
+.mascotShadow {
   position: absolute;
   bottom: 6px;
-  width: 92px;
-  height: 18px;
+  width: 110px;
+  height: 24px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.32);
+  background: rgba(0,0,0,0.35);
   filter: blur(6px);
 }
 
-.songMascotAccessory {
+.mascotAccessory {
   position: absolute;
-  top: 2px;
-  right: 34px;
-  font-size: 1.35rem;
-  animation: mascotFloat 2.4s ease-in-out infinite;
-}
-
-.songMascotModel {
-  position: relative;
-  width: 110px;
-  height: 132px;
-  animation: mascotBob 2.4s ease-in-out infinite;
-}
-
-.songMascotHead {
-  position: absolute;
-  left: 18px;
   top: 0;
-  width: 74px;
-  height: 66px;
-  border-radius: 30px;
-  background: radial-gradient(circle at 35% 28%, #ffffff, #dde4ff 68%, #c7d0ff 100%);
-  box-shadow: inset -8px -10px 0 rgba(173, 184, 255, 0.34), 0 10px 18px rgba(0,0,0,0.22);
+  right: 16px;
+  font-size: 1.5rem;
+  animation: floaty 2.2s ease-in-out infinite;
 }
 
-.songMascotEar {
+.mascot3D {
+  position: relative;
+  width: 126px;
+  height: 144px;
+  animation: bobMascot 2.2s ease-in-out infinite;
+}
+
+.mascotHead {
+  position: absolute;
+  left: 23px;
+  top: 0;
+  width: 80px;
+  height: 72px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #d7deff 68%, #bdc7ff 100%);
+  box-shadow: inset -8px -12px 0 rgba(173, 184, 255, 0.35), 0 10px 18px rgba(0,0,0,0.22);
+}
+
+.mascotEar {
   position: absolute;
   top: -10px;
-  width: 22px;
+  width: 24px;
   height: 28px;
+  border-radius: 18px 18px 10px 10px;
   background: inherit;
   box-shadow: inherit;
 }
 
-.songMascotEar.left { left: 8px; }
-.songMascotEar.right { right: 8px; }
+.mascotEar.left { left: 8px; transform: rotate(-18deg); }
+.mascotEar.right { right: 8px; transform: rotate(18deg); }
 
-.songMascotFace {
+.mascotFace {
   position: absolute;
   inset: 18px 0 0;
   display: grid;
   place-items: center;
-  color: #18253f;
-  font-size: 0.96rem;
+  color: #13203a;
   font-weight: 900;
+  font-size: 1.02rem;
 }
 
-.songMascotBody {
+.mascotBody {
   position: absolute;
-  left: 22px;
-  top: 56px;
-  width: 66px;
-  height: 54px;
-  border-radius: 26px;
-  background: radial-gradient(circle at 35% 28%, #ffffff, #dde4ff 68%, #c7d0ff 100%);
-  box-shadow: inset -6px -8px 0 rgba(173,184,255,0.34), 0 12px 18px rgba(0,0,0,0.18);
+  left: 28px;
+  top: 60px;
+  width: 70px;
+  height: 58px;
+  border-radius: 28px;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #d7deff 70%, #bcc7ff 100%);
+  box-shadow: inset -6px -10px 0 rgba(173,184,255,0.35), 0 12px 18px rgba(0,0,0,0.2);
 }
 
-.songMascotBelly {
+.mascotBelly {
   position: absolute;
   left: 18px;
   top: 12px;
-  width: 30px;
-  height: 24px;
-  border-radius: 16px;
+  width: 34px;
+  height: 28px;
+  border-radius: 20px;
   background: rgba(255,255,255,0.72);
 }
 
-.songMascotArm, .songMascotLeg, .songMascotTail {
+.mascotArm, .mascotLeg {
   position: absolute;
-  background: linear-gradient(180deg, #e2e7ff, #c9d2ff);
-  box-shadow: 0 8px 14px rgba(0,0,0,0.14);
+  background: linear-gradient(180deg, #dce2ff, #bcc7ff);
+  box-shadow: 0 8px 14px rgba(0,0,0,0.18);
 }
 
-.songMascotArm {
-  top: 70px;
-  width: 16px;
-  height: 34px;
-  border-radius: 12px;
-}
-
-.songMascotArm.left { left: 10px; transform: rotate(18deg); }
-.songMascotArm.right { right: 10px; transform: rotate(-18deg); }
-
-.songMascotLeg {
-  top: 102px;
-  width: 18px;
-  height: 24px;
-  border-radius: 12px;
-}
-
-.songMascotLeg.left { left: 32px; }
-.songMascotLeg.right { right: 32px; }
-
-.songMascotTail {
-  right: 8px;
+.mascotArm {
   top: 74px;
-  width: 32px;
-  height: 14px;
-  border-radius: 999px;
-  transform: rotate(22deg);
-}
-
-/* Character variations from title */
-.songMascotOverlay.heartbunny .songMascotEar {
-  border-radius: 14px 14px 8px 8px;
-  height: 34px;
-}
-.songMascotOverlay.heartbunny .songMascotEar.left { transform: rotate(-8deg); }
-.songMascotOverlay.heartbunny .songMascotEar.right { transform: rotate(8deg); }
-.songMascotOverlay.heartbunny .songMascotTail { display: none; }
-
-.songMascotOverlay.phantomcat .songMascotEar {
-  border-radius: 4px 16px 4px 16px;
-  height: 24px;
-}
-.songMascotOverlay.phantomcat .songMascotEar.left { transform: rotate(-18deg); }
-.songMascotOverlay.phantomcat .songMascotEar.right { transform: rotate(18deg); }
-.songMascotOverlay.phantomcat .songMascotTail {
-  width: 38px;
-  transform: rotate(36deg);
-}
-
-.songMascotOverlay.emberfox .songMascotEar {
-  border-radius: 5px 18px 6px 18px;
-  height: 26px;
-}
-.songMascotOverlay.emberfox .songMascotTail {
-  width: 42px;
-  height: 16px;
-  transform: rotate(24deg);
-}
-
-.songMascotOverlay.aquadrop .songMascotHead {
-  border-radius: 34px 34px 30px 30px;
-}
-.songMascotOverlay.aquadrop .songMascotEar { display: none; }
-.songMascotOverlay.aquadrop .songMascotTail { display: none; }
-.songMascotOverlay.aquadrop .songMascotBody { border-radius: 28px; }
-
-.songMascotOverlay.boltbirb .songMascotHead {
-  border-radius: 30px 30px 26px 26px;
-}
-.songMascotOverlay.boltbirb .songMascotEar {
   width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  top: -4px;
-}
-.songMascotOverlay.boltbirb .songMascotTail {
-  width: 12px;
-  height: 24px;
-  border-radius: 8px 16px 16px 8px;
-  transform: rotate(10deg);
+  height: 40px;
+  border-radius: 14px;
 }
 
-.songMascotOverlay.mint .songMascotAccessory { color: #67e8f9; }
-.songMascotOverlay.pink .songMascotAccessory { color: #f9a8d4; }
-.songMascotOverlay.violet .songMascotAccessory { color: #c4b5fd; }
-.songMascotOverlay.orange .songMascotAccessory { color: #fdba74; }
-.songMascotOverlay.cyan .songMascotAccessory { color: #7dd3fc; }
-.songMascotOverlay.lime .songMascotAccessory { color: #bef264; }
+.mascotArm.left { left: 18px; transform: rotate(18deg); }
+.mascotArm.right { right: 18px; transform: rotate(-18deg); }
 
-.songMascotOverlay.mint .songMascotBubble { border-color: rgba(45,212,191,0.34); }
-.songMascotOverlay.pink .songMascotBubble { border-color: rgba(244,114,182,0.34); }
-.songMascotOverlay.violet .songMascotBubble { border-color: rgba(167,139,250,0.34); }
-.songMascotOverlay.orange .songMascotBubble { border-color: rgba(251,146,60,0.34); }
-.songMascotOverlay.cyan .songMascotBubble { border-color: rgba(56,189,248,0.34); }
-.songMascotOverlay.lime .songMascotBubble { border-color: rgba(163,230,53,0.34); }
+.mascotLeg {
+  top: 108px;
+  width: 20px;
+  height: 28px;
+  border-radius: 12px;
+}
 
-@keyframes mascotBob {
+.mascotLeg.left { left: 40px; }
+.mascotLeg.right { right: 40px; }
+
+.mascotDock.mint .mascotAccessory { color: #67e8f9; }
+.mascotDock.pink .mascotAccessory { color: #f9a8d4; }
+.mascotDock.violet .mascotAccessory { color: #c4b5fd; }
+.mascotDock.orange .mascotAccessory { color: #fdba74; }
+.mascotDock.cyan .mascotAccessory { color: #7dd3fc; }
+.mascotDock.lime .mascotAccessory { color: #bef264; }
+
+.mascotDock.mint { border-color: rgba(45, 212, 191, 0.45); }
+.mascotDock.pink { border-color: rgba(244, 114, 182, 0.45); }
+.mascotDock.violet { border-color: rgba(167, 139, 250, 0.45); }
+.mascotDock.orange { border-color: rgba(251, 146, 60, 0.45); }
+.mascotDock.cyan { border-color: rgba(56, 189, 248, 0.45); }
+.mascotDock.lime { border-color: rgba(163, 230, 53, 0.45); }
+
+@keyframes bobMascot {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
 }
 
-@keyframes mascotFloat {
+@keyframes floaty {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-7px) rotate(8deg); }
+  50% { transform: translateY(-6px) rotate(8deg); }
 }
 
 @media (max-width: 900px) {
-  main { padding-bottom: 175px; }
-  .songMascotOverlay {
-    width: 200px;
-    right: 14px;
-    bottom: 14px;
+  main { padding-bottom: 260px; }
+  .mascotDock {
+    grid-template-columns: 1fr;
+    align-items: start;
   }
-  .songMascotBubble p {
-    font-size: 0.82rem;
+  .mascotStage {
+    justify-content: center;
+    height: 132px;
   }
 }
 
 @media (max-width: 620px) {
-  main { padding-bottom: 120px; }
-  .songMascotOverlay {
-    width: 140px;
-    right: 10px;
-    bottom: 10px;
+  main { padding-bottom: 300px; }
+  .mascotDock {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 14px;
   }
-  .songMascotBubble {
-    padding: 8px 10px;
-  }
-  .songMascotBubble p,
-  .songMascotLabel {
-    display: none;
-  }
-  .songMascotBubble strong {
-    font-size: 0.82rem;
-  }
-  .songMascotFloat {
-    height: 108px;
-  }
-  .songMascotModel {
-    transform: scale(0.8);
+  .mascot3D {
+    transform: scale(0.9);
     transform-origin: center bottom;
   }
 }
