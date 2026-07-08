@@ -676,214 +676,158 @@ select option:focus {
 }
 
 
+/* v1.2: mascot removed */
 main {
-  padding-bottom: 210px;
+  padding-bottom: 80px;
 }
 
-.mascotDock {
-  position: fixed;
-  left: 18px;
-  right: 18px;
-  bottom: 18px;
-  z-index: 40;
-  display: grid;
-  grid-template-columns: 1.25fr 220px;
-  gap: 14px;
-  align-items: end;
-  padding: 16px 18px;
-  border-radius: 24px;
-  background: rgba(8, 12, 24, 0.92);
-  border: 1px solid #243149;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+
+.playableCard {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 22px;
+  background: #0b1220;
+  border: 1px solid #223049;
 }
 
-.mascotBubble {
-  padding: 14px 16px;
-  border-radius: 20px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.08);
+.playableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
-.mascotBubble strong,
-.mascotBubble p,
-.mascotCaption,
-.mascotMeta {
+.playableHeader h3,
+.playableHeader p,
+.playableStats span,
+.playableStats strong {
   color: #ffffff;
 }
 
-.mascotCaption {
-  margin: 0 0 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.72rem;
-  opacity: 0.82;
-}
-
-.mascotMeta {
-  margin: 4px 0 8px;
-  opacity: 0.82;
-}
-
-.mascotStage {
-  position: relative;
-  height: 156px;
+.playableStats {
   display: grid;
-  place-items: end center;
+  grid-template-columns: repeat(4, auto);
+  gap: 10px;
 }
 
-.mascotShadow {
-  position: absolute;
-  bottom: 6px;
-  width: 110px;
-  height: 24px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.35);
-  filter: blur(6px);
-}
-
-.mascotAccessory {
-  position: absolute;
-  top: 0;
-  right: 16px;
-  font-size: 1.5rem;
-  animation: floaty 2.2s ease-in-out infinite;
-}
-
-.mascot3D {
-  position: relative;
-  width: 126px;
-  height: 144px;
-  animation: bobMascot 2.2s ease-in-out infinite;
-}
-
-.mascotHead {
-  position: absolute;
-  left: 23px;
-  top: 0;
-  width: 80px;
-  height: 72px;
-  border-radius: 32px;
-  background: radial-gradient(circle at 35% 30%, #ffffff, #d7deff 68%, #bdc7ff 100%);
-  box-shadow: inset -8px -12px 0 rgba(173, 184, 255, 0.35), 0 10px 18px rgba(0,0,0,0.22);
-}
-
-.mascotEar {
-  position: absolute;
-  top: -10px;
-  width: 24px;
-  height: 28px;
-  border-radius: 18px 18px 10px 10px;
-  background: inherit;
-  box-shadow: inherit;
-}
-
-.mascotEar.left { left: 8px; transform: rotate(-18deg); }
-.mascotEar.right { right: 8px; transform: rotate(18deg); }
-
-.mascotFace {
-  position: absolute;
-  inset: 18px 0 0;
-  display: grid;
-  place-items: center;
-  color: #13203a;
-  font-weight: 900;
-  font-size: 1.02rem;
-}
-
-.mascotBody {
-  position: absolute;
-  left: 28px;
-  top: 60px;
-  width: 70px;
-  height: 58px;
-  border-radius: 28px;
-  background: radial-gradient(circle at 35% 30%, #ffffff, #d7deff 70%, #bcc7ff 100%);
-  box-shadow: inset -6px -10px 0 rgba(173,184,255,0.35), 0 12px 18px rgba(0,0,0,0.2);
-}
-
-.mascotBelly {
-  position: absolute;
-  left: 18px;
-  top: 12px;
-  width: 34px;
-  height: 28px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.72);
-}
-
-.mascotArm, .mascotLeg {
-  position: absolute;
-  background: linear-gradient(180deg, #dce2ff, #bcc7ff);
-  box-shadow: 0 8px 14px rgba(0,0,0,0.18);
-}
-
-.mascotArm {
-  top: 74px;
-  width: 18px;
-  height: 40px;
+.playableStats span {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 72px;
+  padding: 10px 12px;
   border-radius: 14px;
+  background: #111827;
+  border: 1px solid #253248;
+  font-size: 0.78rem;
 }
 
-.mascotArm.left { left: 18px; transform: rotate(18deg); }
-.mascotArm.right { right: 18px; transform: rotate(-18deg); }
-
-.mascotLeg {
-  top: 108px;
-  width: 20px;
-  height: 28px;
-  border-radius: 12px;
+.playableStats strong {
+  font-size: 1.1rem;
 }
 
-.mascotLeg.left { left: 40px; }
-.mascotLeg.right { right: 40px; }
-
-.mascotDock.mint .mascotAccessory { color: #67e8f9; }
-.mascotDock.pink .mascotAccessory { color: #f9a8d4; }
-.mascotDock.violet .mascotAccessory { color: #c4b5fd; }
-.mascotDock.orange .mascotAccessory { color: #fdba74; }
-.mascotDock.cyan .mascotAccessory { color: #7dd3fc; }
-.mascotDock.lime .mascotAccessory { color: #bef264; }
-
-.mascotDock.mint { border-color: rgba(45, 212, 191, 0.45); }
-.mascotDock.pink { border-color: rgba(244, 114, 182, 0.45); }
-.mascotDock.violet { border-color: rgba(167, 139, 250, 0.45); }
-.mascotDock.orange { border-color: rgba(251, 146, 60, 0.45); }
-.mascotDock.cyan { border-color: rgba(56, 189, 248, 0.45); }
-.mascotDock.lime { border-color: rgba(163, 230, 53, 0.45); }
-
-@keyframes bobMascot {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+.playCanvas {
+  width: 100%;
+  height: 280px;
+  display: block;
+  margin-top: 14px;
+  border-radius: 18px;
+  background: #080d18;
+  border: 1px solid #253248;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
 }
 
-@keyframes floaty {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(8deg); }
+.playControls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
 }
 
-@media (max-width: 900px) {
-  main { padding-bottom: 260px; }
-  .mascotDock {
+.physicalButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.hitButton {
+  min-height: 92px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #18243a, #0f172a);
+  border: 1px solid #334155;
+  box-shadow: 0 8px 0 #060a12, 0 16px 28px rgba(0,0,0,0.24);
+  color: #ffffff;
+  transform: translateY(0);
+  transition: transform 0.05s ease, box-shadow 0.05s ease, border-color 0.08s ease;
+}
+
+.hitButton span {
+  display: block;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.hitButton small {
+  display: block;
+  margin-top: 6px;
+  color: #cbd5e1;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.hitButton.active,
+.hitButton:active {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 #060a12, 0 8px 18px rgba(0,0,0,0.20);
+  border-color: #2dd4bf;
+}
+
+@media (max-width: 780px) {
+  .playableStats {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  .physicalButtons {
     grid-template-columns: 1fr;
-    align-items: start;
   }
-  .mascotStage {
-    justify-content: center;
-    height: 132px;
+
+  .playCanvas {
+    height: 230px;
   }
 }
 
-@media (max-width: 620px) {
-  main { padding-bottom: 300px; }
-  .mascotDock {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    padding: 14px;
-  }
-  .mascot3D {
-    transform: scale(0.9);
-    transform-origin: center bottom;
-  }
+
+.conversionPlaytest {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(45,212,191,0.08), rgba(15,23,42,0.88));
+  border: 1px solid #223049;
+}
+
+.conversionPlaytestHeader h3,
+.conversionPlaytestHeader p,
+.conversionPlaytestHeader strong {
+  color: #ffffff;
+}
+
+.conversionPlaytestHeader p {
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.conversionPlaytest .playableCard {
+  margin-top: 12px;
+}
+
+.conversionPlaytest .playCanvas {
+  height: 230px;
+}
+
+.conversionPlaytest .hitButton {
+  min-height: 76px;
 }

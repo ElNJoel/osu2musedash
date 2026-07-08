@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CoverCropper } from "./CoverCropper";
 import { DemoEditor } from "./DemoEditor";
-import { SongMascot } from "./SongMascot";
+import { PlayablePreview } from "./PlayablePreview";
 import { estimateAudioDuration } from "./audioTools";
 import { buildMdmPackage, downloadBlob, safeFilename } from "./mdmBuilder";
 import { bytesToFile, findBestAudioPath, findBestBackgroundPath, loadBeatmapPackage, resolvePackageFile } from "./osuParser";
@@ -125,7 +125,19 @@ export default function App() {
     }
   }
 
-  function toggleDifficulty(map: OsuBeatmap) {
+  async function loadAudioPreviewForMap(map: OsuBeatmap) {
+    if (!pkg) return;
+    const audioPath = findBestAudioPath(pkg, map);
+    const audioBytes = resolvePackageFile(pkg, audioPath);
+    if (!audioBytes || !audioPath) return;
+
+    const ext = audioPath.split(".").pop()?.toLowerCase() || "mp3";
+    const file = bytesToFile(audioBytes, audioPath.split("/").pop() || `audio.${ext}`, `audio/${ext}`);
+    setAudioFile(file);
+    setAudioDurationS(await estimateAudioDuration(file).catch(() => Math.max(120, mapDuration(map) + 30)));
+  }
+
+  async function toggleDifficulty(map: OsuBeatmap) {
     const exists = selected.find((s) => s.beatmap.id === map.id);
     if (exists) {
       const next = selected.filter((s) => s.beatmap.id !== map.id).map((s, i) => ({ ...s, mdSlot: (i + 1) as 1 | 2 | 3 }));
@@ -136,6 +148,9 @@ export default function App() {
       alert("Muse Dash shows 3 visible difficulty buttons. Choose up to 3.");
       return;
     }
+
+    await loadAudioPreviewForMap(map);
+
     setSelected([
       ...selected,
       {
@@ -278,7 +293,7 @@ export default function App() {
                     <span>{modeName(map)} · {map.hitObjects.length} objects · {mapDuration(map).toFixed(1)}s · BPM {map.baseBpm.toFixed(2)}</span>
                     <span>OD {map.difficulty.OverallDifficulty ?? "?"} / CS {map.difficulty.CircleSize ?? "?"} / AR {map.difficulty.ApproachRate ?? "?"} / suggested MD Lv {map.estimatedMdLevel}</span>
                   </div>
-                  <button className={picked ? "selectToggle isSelected" : "selectToggle"} type="button" onClick={() => toggleDifficulty(map)}>{picked ? `Selected · map${picked.mdSlot}` : "Select"}</button>
+                  <button className={picked ? "selectToggle isSelected" : "selectToggle"} type="button" onClick={() => void toggleDifficulty(map)}>{picked ? `Selected · map${picked.mdSlot}` : "Select"}</button>
                   {picked && (
                     <div className="inlineFields">
                       <label>
@@ -345,6 +360,16 @@ export default function App() {
               </label>
             </div>
           </div>
+
+          {mainMap && (
+            <div className="conversionPlaytest">
+              <div className="conversionPlaytestHeader">
+                <h3>Test conversion type</h3>
+                <p>Change <strong>osu!standard lane policy</strong> above — auto, hitsound, xy, or alternate — and play this preview to feel how that conversion maps the notes.</p>
+              </div>
+              <PlayablePreview beatmap={mainMap} audioFile={audioFile} lanePolicy={settings.lanePolicy} />
+            </div>
+          )}
 
           <div className="buttonRow">
             <button type="button" onClick={() => setStep(1)}>Back</button>
@@ -423,7 +448,6 @@ export default function App() {
         {log.length ? log.map((line, i) => <p key={`${line}-${i}`}>{line}</p>) : <p>{buildStatus}</p>}
       </section>
 
-      <SongMascot title={mainMap?.title ?? null} artist={mainMap?.artist ?? null} />
     </main>
   );
 }
